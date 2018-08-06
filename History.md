@@ -1,3 +1,7 @@
+0.2.0 / 2018-08-06
+==================
+
+  * add missing support for hosts file, HOSTS_FILE env var
 
 0.1.0 / 2016-11-30
 ==================

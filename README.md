@@ -6,7 +6,7 @@ This is intended to be used within (but not limited to) a local docker developme
 
 #### Quickstart:
 
-`docker run -p 53:53/udp -d --restart always finboxio/docker-dns`
+`docker run -p 53:53/udp -d --restart always 0rcinus/docker-dns`
 
 Once this container is running, configure your system to route DNS queries through localhost and you're all set.
 
@@ -22,12 +22,7 @@ Once this container is running, configure your system to route DNS queries throu
 	127.0.0.1 		*.docker
 	192.168.99.100 	*.rancher
 	```
-
-> Note:
->
-> The second entry is really only effective if you have a rancher host running in a virtual machine with the IP 192.168.99.100. I do some development against a local rancher cluster spun up via [mac-ranch](https://github.com/finboxio/mac-ranch), so this is actually a reasonably useful default for me.
->
-
+  
 #### Using with a reverse proxy
 
 [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) makes this really easy:
@@ -50,3 +45,5 @@ Now, you can start up any container with `VIRTUAL_HOST` set to a `docker` domain
 #### Acknowlegements
 
 DNS proxy code shamelessly copied from [hubdotcom/marlon-tools](https://github.com/hubdotcom/marlon-tools). Thanks for the great work!
+This is a fork of the original at finboxio/docker-dns that was missing the HOSTS_FILE feature as well as any kind of hosts loading from disk (it was using hard-coded entries). 
+The author appears to have deserted the project and is not accepting PRs.

@@ -1,6 +1,6 @@
 {
   "name": "docker-dns",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "nodejs dns proxy with dockerfile",
   "main": "index.js",
   "scripts": {
@@ -8,18 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/finboxio/docker-dns.git"
+    "url": "git+https://github.com/orcinus/docker-dns.git"
   },
   "keywords": [
     "dns",
     "proxy"
   ],
-  "author": "Brian Dentino",
+  "author": "Ante Vukorepa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/finboxio/docker-dns/issues"
+    "url": "https://github.com/orcinus/docker-dns/issues"
   },
-  "homepage": "https://github.com/finboxio/docker-dns#readme",
+  "homepage": "https://github.com/orcinus/docker-dns#readme",
   "dependencies": {
     "debug": "2.3.3",
     "native-dns-packet": "0.1.1",
