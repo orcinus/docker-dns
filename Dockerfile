@@ -7,6 +7,7 @@ ADD package.json /tmp/package.json
 
 RUN cd /tmp && npm install
 COPY *.js /usr/src/
+COPY hosts /usr/src/
 
 RUN ln -sf /tmp/node_modules /usr/src/node_modules
 RUN ln -sf /tmp/package.json /usr/src/package.json

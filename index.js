@@ -1,13 +1,25 @@
 var PORT = process.env.PORT || 53
 var EXTERNAL_DNS = process.env.EXTERNAL_DNS || '8.8.8.8,8.8.4.4'
+var HOSTS_FILE = process.env.HOSTS_FILE || './hosts'
+
+var domains = {};
+
+const readline = require('readline');
+const fs = require('fs');
+
+const hostsRegex = /([0-9]{1,3}\.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})\s*\*?(.*)/;
+
+readline.createInterface({
+    input: fs.createReadStream(HOSTS_FILE),
+    terminal: false
+}).on('line', function(line) {
+   var entry = line.match(hostsRegex)
+   opts.domains[entry[2]] = entry[1];
+});
 
 var opts = require('rc')('dnsproxy', {
   host: '0.0.0.0',
   logging: 'dnsproxy:query',
-  domains: {
-    '.docker': '127.0.0.1',
-    '.rancher': '192.168.99.100'
-  },
   fallback_timeout: 350
 })
 
@@ -15,8 +27,12 @@ if (!opts.port) opts.port = PORT
 if (!opts.host) opts.host = '0.0.0.0'
 if (!opts.nameservers) opts.nameservers = EXTERNAL_DNS.split(',')
 if (!opts.servers) opts.servers = {}
-if (!opts.domains) opts.domains = {}
+if (!opts.domains) opts.domains = {'.docker': '127.0.0.1', '.rancher': '192.168.99.100'}
 if (!opts.hosts) opts.hosts = {}
+
+fs.exists(HOSTS_FILE, function() {
+  opts.domains = {}
+})
 
 process.env.DEBUG_FD = process.env.DEBUG_FD || 1
 process.env.DEBUG = process.env.DEBUG || opts.logging
